@@ -1,0 +1,9 @@
+# Keep private docs out of public repo
+*.docx
+*.xlsx
+*.xls
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini

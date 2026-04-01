@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EDGE Makerspace Society — Calgary</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f0f0f'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-size='70' fill='%237c3aed' font-weight='bold'>E</text></svg>">
+  <style>
+    :root {
+      --dark-bg: #0f0f0f;
+      --accent: #7c3aed;
+      --accent-hover: #9d5ff5;
+      --text-light: #ffffff;
+      --text-medium: #cccccc;
+      --border: #2a2a2a;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; scroll-behavior: smooth; }
+    body { background: var(--dark-bg); color: var(--text-light); font-family: "Segoe UI", sans-serif; line-height: 1.6; }
+    a { color: var(--accent); text-decoration: none; }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0;
+      background: rgba(15,15,15,0.96);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 2px solid var(--accent);
+      padding: 0.9rem 2rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    nav .logo { display: flex; align-items: center; gap: 0.6rem; }
+    nav .logo img { height: 36px; width: auto; display: none; }
+    nav .logo img.loaded { display: block; }
+    nav .logo-text { font-weight: bold; color: var(--accent); font-size: 1.4rem; letter-spacing: 2px; }
+    nav ul { display: flex; list-style: none; gap: 1.5rem; }
+    nav ul a { color: var(--text-light); font-weight: 500; font-size: 0.9rem; transition: color 0.3s; }
+    nav ul a:hover { color: var(--accent); }
+    .menu-toggle { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+    .menu-toggle span { width: 25px; height: 3px; background: var(--text-light); border-radius: 2px; }
+
+    /* HERO */
+    header {
+      position: relative;
+      background: url('scene1.jpg') center center / cover no-repeat;
+      padding: 7rem 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(15,15,15,0.88), rgba(124,58,237,0.25));
+      z-index: 1;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .shape {
+      position: absolute;
+      background: rgba(124,58,237,0.07);
+      border: 1px solid rgba(124,58,237,0.15);
+      border-radius: 4px;
+      animation: float 20s infinite linear;
+      z-index: 1;
+    }
+    @keyframes float {
+      0% { transform: translateY(100%) rotate(0deg); opacity: 0; }
+      10% { opacity: 1; } 90% { opacity: 1; }
+      100% { transform: translateY(-100%) rotate(360deg); opacity: 0; }
+    }
+    header h1 { font-size: 3.5rem; margin-bottom: 0.5rem; text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
+    header .tagline { font-size: 1.15rem; color: #e0d7ff; margin-bottom: 2.5rem; max-width: 680px; margin-left: auto; margin-right: auto; text-shadow: 0 1px 8px rgba(0,0,0,0.9); }
+    .cta-buttons { display: flex; justify-content: center; gap: 1.5rem; }
+    .cta-buttons button {
+      background: var(--accent); border: none; color: white;
+      padding: 0.85rem 1.75rem; font-size: 1rem; border-radius: 6px;
+      cursor: pointer; transition: transform 0.2s, background 0.3s;
+    }
+    .cta-buttons button:hover { background: var(--accent-hover); transform: translateY(-2px); }
+
+    /* MAIN */
+    main { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    section { margin-bottom: 5rem; }
+    h2 { font-size: 2.2rem; margin-bottom: 1.8rem; color: var(--accent); text-align: center; }
+    .mission-values { max-width: 780px; margin: 0 auto; text-align: center; }
+    .mission-values p { font-size: 1.05rem; margin-bottom: 1.2rem; color: var(--text-medium); }
+    .grid { display: flex; flex-wrap: wrap; gap: 1.5rem; }
+    .grid > div {
+      background: var(--border); padding: 1.8rem; border-radius: 12px;
+      flex: 1 1 280px; min-width: 240px; transition: transform 0.3s;
+      border: 1px solid #333;
+    }
+    .grid > div:hover { transform: translateY(-5px); border-color: var(--accent); }
+    .grid h3 { margin-bottom: 0.6rem; color: var(--accent); font-size: 1rem; }
+    .grid p { font-size: 0.88rem; color: var(--text-medium); }
+
+    /* TEAM */
+    .team { display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center; }
+    .team-card {
+      background: var(--border); padding: 1.8rem; border-radius: 12px;
+      width: 220px; text-align: center; border: 1px solid #333;
+      transition: border-color 0.3s;
+    }
+    .team-card:hover { border-color: var(--accent); }
+    .team-card .avatar {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: var(--accent); margin: 0 auto 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; font-weight: bold; color: white;
+    }
+    .team-card h3 { font-size: 1rem; margin-bottom: 0.3rem; }
+    .team-card p { font-size: 0.82rem; color: var(--text-medium); }
+
+    /* VIDEO */
+    .video-container {
+      position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;
+      max-width: 800px; margin: 0 auto;
+      border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border: 1px solid #333;
+    }
+    .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+    .video-placeholder {
+      max-width: 800px; margin: 0 auto; background: var(--border);
+      border-radius: 12px; padding: 4rem 2rem; text-align: center;
+      color: var(--text-medium); border: 1px dashed #444;
+    }
+
+    /* CONTACT */
+    .contact-form { max-width: 580px; margin: 0 auto; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 0.85rem; margin-bottom: 1.1rem;
+      background: var(--border); border: 1px solid #444;
+      color: var(--text-light); border-radius: 6px; font-size: 0.92rem;
+      transition: border-color 0.3s;
+    }
+    .contact-form input:focus, .contact-form textarea:focus { outline: none; border-color: var(--accent); }
+    .contact-form button { width: 100%; background: var(--accent); border: none; color: white; padding: 0.85rem; border-radius: 6px; cursor: pointer; font-size: 0.95rem; }
+    .contact-form button:hover { background: var(--accent-hover); }
+
+    /* FOOTER */
+    footer { background: var(--border); padding: 3rem 2rem; text-align: center; color: var(--text-medium); }
+    footer .social-note { margin-top: 1rem; font-size: 0.82rem; color: #666; }
+
+    @media (max-width: 768px) {
+      nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: var(--dark-bg); padding: 1.5rem; border-bottom: 2px solid var(--accent); gap: 1rem; text-align: center; }
+      nav ul.active { display: flex; }
+      .menu-toggle { display: flex; }
+      header h1 { font-size: 2.2rem; }
+      .cta-buttons { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="logo">
+      <!-- Replace logo.png with your nanobanana logo file -->
+      <img src="logo.png" alt="EDGE Logo" id="logo-img" onload="this.classList.add('loaded')">
+      <span class="logo-text">EDGE</span>
+    </div>
+    <div class="menu-toggle" id="mobile-menu">
+      <span></span><span></span><span></span>
+    </div>
+    <ul id="nav-links">
+      <li><a href="#mission">Mission</a></li>
+      <li><a href="#programs">Programs</a></li>
+      <li><a href="#who-we-serve">Who We Serve</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#get-involved">Get Involved</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <header>
+    <div id="hero-shapes"></div>
+    <div class="hero-content">
+      <h1>EDGE Makerspace Society</h1>
+      <p class="tagline">"A computer missing one part is just a brick. EDGE is the motherboard."</p>
+      <div class="cta-buttons">
+        <button onclick="document.getElementById('get-involved').scrollIntoView({behavior:'smooth'})">Get Involved</button>
+        <button onclick="document.getElementById('donate').scrollIntoView({behavior:'smooth'})">Support Our Mission</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="mission">
+      <h2>Mission & Values</h2>
+      <div class="mission-values">
+        <p>At EDGE, we believe in the power of hands-on STEM learning, maker culture, and digital equity to transform lives. Our mission is to provide underserved communities — youth, newcomers, and low-income families — with the tools, knowledge, and mentorship needed to thrive in a technology-driven world.</p>
+        <p>Our values are rooted in inclusivity, innovation, and empowerment. A space where everyone, regardless of background, can explore, create, and grow.</p>
+      </div>
+    </section>
+
+    <section id="programs">
+      <h2>Programs</h2>
+      <div class="grid">
+        <div><h3>STEM Workshops</h3><p>Hands-on learning in robotics, coding, and engineering for all ages.</p></div>
+        <div><h3>Maker Space Access</h3><p>Open access to tools, equipment, and collaborative spaces for community projects.</p></div>
+        <div><h3>Mentorship</h3><p>One-on-one and group mentorship connecting learners with industry experts.</p></div>
+      </div>
+    </section>
+
+    <section id="who-we-serve">
+      <h2>Who We Serve</h2>
+      <div class="grid">
+        <div><h3>Youth</h3><p>Empowering young minds through interactive learning and creative problem-solving.</p></div>
+        <div><h3>Newcomers</h3><p>Digital literacy and tech skills to help integrate into the workforce.</p></div>
+        <div><h3>Low-Income Families</h3><p>Affordable access to technology and educational resources.</p></div>
+      </div>
+    </section>
+
+    <section id="team">
+      <h2>Our Team</h2>
+      <div class="team">
+        <div class="team-card"><div class="avatar">V</div><h3>Victor</h3><p>Founder & Tech Lead</p></div>
+        <div class="team-card"><div class="avatar">M</div><h3>Malakye</h3><p>Co-Founder & Community</p></div>
+        <div class="team-card"><div class="avatar">B</div><h3>Brad Nault</h3><p>Founding Member</p></div>
+      </div>
+    </section>
+
+    <section id="get-involved">
+      <h2>Get Involved</h2>
+      <div class="grid">
+        <div><h3>Volunteer</h3><p>Share your skills and time to mentor or help with community projects.</p></div>
+        <div><h3>Donate</h3><p>Support our mission with financial contributions or in-kind donations.</p></div>
+        <div><h3>Partner With Us</h3><p>Collaborate with organizations, schools, or businesses to expand our impact.</p></div>
+      </div>
+    </section>
+
+    <section id="donate">
+      <h2>Support EDGE</h2>
+      <div class="mission-values">
+        <p>Your support helps us provide free programs, maintain our maker space, and reach more communities. Every contribution makes a difference.</p>
+        <div class="cta-buttons" style="margin-top:1.5rem;">
+          <button onclick="window.location.href='mailto:info@edgecalgary.org'">Get In Touch</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="video">
+      <h2>See EDGE in Action</h2>
+      <div class="video-placeholder">
+        <p style="font-size:2rem;margin-bottom:1rem;">▶</p>
+        <p>Promo video coming soon</p>
+        <p style="font-size:0.8rem;margin-top:0.5rem;color:#555;">Upload EdgePromo.mp4 to YouTube and replace this section</p>
+      </div>
+    </section>
+
+    <section id="contact" class="contact-form">
+      <h2>Contact Us</h2>
+      <form>
+        <input type="text" placeholder="Your Name" aria-label="Name" required />
+        <input type="email" placeholder="Your Email" aria-label="Email" required />
+        <textarea rows="5" placeholder="Your Message" aria-label="Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>EDGE Makerspace Society &copy; 2026 &mdash; Calgary, Alberta</p>
+    <p>info@edgecalgary.org</p>
+    <p class="social-note">Social media coming soon — Facebook &bull; X &bull; Instagram &bull; LinkedIn</p>
+  </footer>
+
+  <script>
+    const menu = document.getElementById('mobile-menu');
+    const links = document.getElementById('nav-links');
+    menu.addEventListener('click', () => links.classList.toggle('active'));
+    document.querySelectorAll('#nav-links a').forEach(l => l.addEventListener('click', () => links.classList.remove('active')));
+
+    const shapes = document.getElementById('hero-shapes');
+    for (let i = 0; i < 12; i++) {
+      const s = document.createElement('div');
+      s.className = 'shape';
+      const sz = Math.random() * 45 + 15;
+      s.style.cssText = `width:${sz}px;height:${sz}px;left:${Math.random()*100}%;animation-delay:${Math.random()*20}s;animation-duration:${Math.random()*10+15}s;`;
+      shapes.appendChild(s);
+    }
+
+    // Hide logo text when logo image loads successfully
+    const logoImg = document.getElementById('logo-img');
+    if (logoImg) {
+      logoImg.addEventListener('load', () => {
+        document.querySelector('.logo-text').style.display = 'none';
+      });
+    }
+  </script>
+</body>
+</html>
