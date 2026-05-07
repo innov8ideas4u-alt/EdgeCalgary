@@ -24,7 +24,7 @@
             --text-secondary: #94a3b8;
             --border: rgba(255, 255, 255, 0.08);
             --glass: rgba(15, 15, 20, 0.85);
-            --nav-height: 130px;
+            --nav-height: 160px;
             --radius: 12px;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -37,7 +37,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: var(--nav-height);
+            scroll-padding-top: calc(var(--nav-height) + 50px);
         }
 
         body {
@@ -91,7 +91,7 @@
         }
 
         .logo img {
-            height: 160px;
+            height: 192px;
             width: auto;
             border-radius: 0;
             background: transparent;
@@ -556,7 +556,12 @@
 </head>
 <body>
 
-    <nav id="navbar">
+    <!-- Coming Soon Banner -->
+    <div id="coming-soon-banner" style="background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;text-align:center;padding:12px 20px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;position:fixed;top:0;left:0;right:0;z-index:1001;">
+        🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!
+    </div>
+
+    <nav id="navbar" style="top:50px;">
         <div class="logo" onclick="window.scrollTo(0,0)">
             <img src="logo.png" alt="EDGE Logo" id="logo-img">
             <span class="logo-text">EDGE</span>
@@ -572,11 +577,6 @@
             <li><a href="#contact" class="nav-item">Contact</a></li>
         </ul>
     </nav>
-
-    <!-- Coming Soon Banner -->
-    <div style="background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;text-align:center;padding:12px 20px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;z-index:9999;position:relative;">
-        🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!
-    </div>
 
     <header class="hero">
         <div class="hero-content">
