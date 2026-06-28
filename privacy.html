@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — EDGE Makerspace Society</title>
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="EDGE Calgary Community Makerspace Society privacy policy — how we collect, use, protect, and disclose personal information under Alberta PIPA and federal PIPEDA.">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230f0f0f'/><text x='50%' y='55%' dominant-baseline='central' text-anchor='middle' font-family='sans-serif' font-size='70' fill='%236366f1' font-weight='bold'>E</text></svg>">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Outfit:wght@400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-deep: #0a0a0c;
+            --bg-surface: #15151a;
+            --accent: #6366f1; /* Electric Indigo */
+            --accent-glow: rgba(99, 102, 241, 0.5);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --border: rgba(255, 255, 255, 0.08);
+            --glass: rgba(15, 15, 20, 0.85);
+            --nav-height: 70px;
+            --radius: 12px;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            font-family: 'Inter', system-ui, sans-serif;
+            line-height: 1.7;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, .logo-text {
+            font-family: 'Outfit', sans-serif;
+            font-weight: 800;
+        }
+
+        a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        a:hover { text-decoration: underline; }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 50px;
+            width: 100%;
+            height: var(--nav-height);
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 5%;
+            transition: var(--transition);
+        }
+
+        nav.scrolled {
+            height: 70px;
+            border-color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+            margin-left: auto;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.95rem;
+            position: relative;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); text-decoration: none; }
+
+        /* Log In / Sign Up pill -> EDGE OS */
+        .nav-links a.nav-cta {
+            background: var(--accent);
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 100px;
+            box-shadow: 0 6px 16px var(--accent-glow);
+            white-space: nowrap;
+        }
+        .nav-links a.nav-cta:hover {
+            background: #4f46e5;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 22px var(--accent-glow);
+            text-decoration: none;
+        }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .menu-toggle span {
+            width: 30px;
+            height: 2px;
+            background: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        /* --- POLICY CONTENT --- */
+        .policy {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: calc(var(--nav-height) + 110px) 5% 100px;
+        }
+
+        .policy-header {
+            margin-bottom: 48px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 32px;
+        }
+
+        .policy-header h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 16px;
+        }
+
+        .policy-meta {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-style: italic;
+        }
+
+        .policy .intro {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 40px;
+        }
+
+        .policy section {
+            margin-bottom: 36px;
+        }
+
+        .policy h2 {
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-bottom: 14px;
+        }
+
+        .policy p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .policy ul {
+            color: var(--text-secondary);
+            margin: 0 0 16px 1.25rem;
+        }
+
+        .policy li {
+            margin-bottom: 12px;
+        }
+
+        .policy strong { color: var(--text-primary); }
+
+        .policy .closing {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--bg-surface);
+            padding: 80px 5% 40px;
+            border-top: 1px solid var(--border);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 60px;
+            max-width: 1300px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .footer-logo .logo-text { font-size: 2.5rem; }
+        .footer-logo p { color: var(--text-secondary); margin-top: 16px; max-width: 300px; }
+
+        .footer-links h4 { margin-bottom: 24px; font-weight: 700; }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--text-secondary); }
+        .footer-links a:hover { color: var(--accent); padding-left: 5px; text-decoration: none; }
+
+        .social-placeholder {
+            display: flex;
+            gap: 16px;
+            margin-top: 16px;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-3px);
+            text-decoration: none;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        .footer-bottom a { color: var(--text-secondary); }
+        .footer-bottom a:hover { color: var(--accent); }
+
+        /* --- MOBILE RESPONSIVE --- */
+        @media (max-width: 968px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background: var(--bg-surface);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.5s ease;
+                z-index: 1000;
+                box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            }
+
+            .nav-links.active { right: 0; }
+
+            .menu-toggle { display: flex; }
+
+            .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
+
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Coming Soon Banner -->
+    <div id="coming-soon-banner" style="background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;text-align:center;padding:10px 20px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;position:fixed;top:0;left:0;right:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
+        <span>🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!</span>
+        <a href="https://forms.gle/Yy5PbCZVWeQ7Td63A" target="_blank" rel="noopener" style="padding:6px 18px;background:#fff;color:#6d28d9;font-weight:700;border-radius:999px;text-decoration:none;font-size:0.92rem;white-space:nowrap;">Notify Me →</a>
+    </div>
+
+    <nav id="navbar">
+        <a href="/" class="logo-text" style="color:var(--text-primary);font-size:1.4rem;letter-spacing:0.04em;text-decoration:none;">EDGE</a>
+        <div class="menu-toggle" id="mobile-menu">
+            <span></span><span></span><span></span>
+        </div>
+        <ul class="nav-links" id="nav-list">
+            <li><a href="/#mission">Mission</a></li>
+            <li><a href="/#programs">Programs</a></li>
+            <li><a href="/#team">Team</a></li>
+            <li><a href="/#contact">Contact</a></li>
+            <li><a href="/privacy">Privacy</a></li>
+            <li><a href="https://os.edgecalgary.org/" class="nav-cta">Log In / Sign Up</a></li>
+        </ul>
+    </nav>
+
+    <main class="policy">
+        <div class="policy-header">
+            <h1>EDGE Calgary Community Makerspace Society — Privacy Policy</h1>
+            <p class="policy-meta">Last updated: 2026-06-27. Policy version: 1.0.</p>
+        </div>
+
+        <p class="intro">EDGE Calgary Community Makerspace Society ("EDGE", "we", "us") is committed to protecting the personal information entrusted to us by our members, volunteers, donors, and the public. We manage personal information in accordance with Alberta's <strong>Personal Information Protection Act (PIPA)</strong> and the federal <strong>Personal Information Protection and Electronic Documents Act (PIPEDA)</strong>. This policy explains what we collect, why, how we protect it, and your rights. This policy applies to EDGE and to anyone providing services on our behalf.</p>
+
+        <section>
+            <h2>1. What is personal information?</h2>
+            <p>Information about an identifiable individual — e.g. your name, email, phone number, emergency contact, membership and training records, equipment-access and booking history, dues/payment records, and skills you choose to share in the member directory.</p>
+        </section>
+
+        <section>
+            <h2>2. What we collect and why (reasonable purposes)</h2>
+            <p>We collect only what we need to: operate your membership and log you in; control safe access to equipment (certifications and tool grants); schedule equipment; administer membership dues; keep an accountability record of who accessed what (security and safety); communicate with you; and meet our legal, grant-reporting, and insurance obligations. We do not collect more than we need, and we use it only for the purposes for which it was collected.</p>
+        </section>
+
+        <section>
+            <h2>3. Consent</h2>
+            <p>We collect, use, and disclose your personal information with your consent. You give consent when you create a membership account and when you sign our waiver. You may withdraw consent at any time by contacting our Privacy Contact (below), subject to legal or contractual limits (for example, we must retain certain financial records).</p>
+        </section>
+
+        <section>
+            <h2>4. How we protect it</h2>
+            <p>EDGE is built privacy-first. We use database row-level security so a member's records are isolated at the database layer (access fails closed, not open), an immutable audit log, encrypted connections (HTTPS/TLS), single-sign-on authentication, and least-privilege access controls. Administrative, technical, and physical safeguards protect against unauthorized access, use, or disclosure.</p>
+        </section>
+
+        <section>
+            <h2>5. Service providers and storage outside Canada</h2>
+            <p>To run EDGE we rely on trusted service providers, and some of them store or process information outside Canada — primarily in the United States. We want to be fully transparent about who they are:</p>
+            <ul>
+                <li><strong>Oracle Cloud Infrastructure</strong> — hosts EDGE's servers and database (United States / Phoenix region). Your account, membership, access, and audit records are stored here.</li>
+                <li><strong>Google</strong> — powers "Continue with Google" sign-in; if you use it, Google provides your name and email to authenticate you (United States).</li>
+                <li><strong>Anthropic</strong> — powers EDGE's in-app assistant ("Gizmo"); information you share with the assistant may be processed by Anthropic to generate responses (United States).</li>
+            </ul>
+            <p>Because of this, your personal information may be subject to the laws of those jurisdictions, including lawful access by foreign authorities. You may contact our Privacy Contact for information about our policies and practices regarding any of these providers.</p>
+        </section>
+
+        <section>
+            <h2>6. Your rights</h2>
+            <p>You have the right to access the personal information we hold about you and to request corrections. Contact our Privacy Contact to make a request; we will respond within the timelines required by PIPA and will tell you in advance of any fee that may apply.</p>
+        </section>
+
+        <section>
+            <h2>7. Breach</h2>
+            <p>If a privacy breach occurs that poses a real risk of significant harm, we will notify the Office of the Information and Privacy Commissioner of Alberta and affected individuals as required by law.</p>
+        </section>
+
+        <section>
+            <h2>8. Privacy Contact</h2>
+            <p>Victor Snell, Executive Director — <a href="mailto:privacy@edgecalgary.org">privacy@edgecalgary.org</a>.</p>
+        </section>
+
+        <section>
+            <h2>9. Concerns</h2>
+            <p>If you are not satisfied with our response, you may contact the Office of the Information and Privacy Commissioner of Alberta: Suite 2460, 801 – 6 Avenue SW, Calgary, AB T2P 3W2 · 1-888-878-4044 · <a href="mailto:generalinfo@oipc.ab.ca">generalinfo@oipc.ab.ca</a> · <a href="https://oipc.ab.ca" target="_blank" rel="noopener">oipc.ab.ca</a>.</p>
+        </section>
+
+        <p class="closing">EDGE will be held to what this policy says — it reflects our actual practices and will be updated as they change.</p>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-logo">
+                <span class="logo-text">EDGE</span>
+                <p>Empowering Calgary's makers through radical access and world-class mentorship.</p>
+                <div class="social-placeholder">
+                    <a href="#" class="social-icon">f</a>
+                    <a href="#" class="social-icon">𝕏</a>
+                    <a href="#" class="social-icon">i</a>
+                    <a href="#" class="social-icon">in</a>
+                </div>
+            </div>
+            <div class="footer-links">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="/#mission">Philosophy</a></li>
+                    <li><a href="/#programs">Programs</a></li>
+                    <li><a href="/#team">Our Team</a></li>
+                    <li><a href="/#contact">Get Involved</a></li>
+                </ul>
+            </div>
+            <div class="footer-links">
+                <h4>Resources</h4>
+                <ul>
+                    <li><a href="#">Support Us</a></li>
+                    <li><a href="#">Safety Guidelines</a></li>
+                    <li><a href="#">Maker Resources</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 EDGE Makerspace Society. All rights reserved. A non-profit society in formation in Calgary, Alberta. · <a href="/privacy">Privacy Policy</a></p>
+        </div>
+    </footer>
+
+    <script>
+        // --- NAVIGATION BEHAVIOR ---
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('mobile-menu');
+        const navList = document.getElementById('nav-list');
+        if (menuBtn && navList) {
+            menuBtn.addEventListener('click', () => {
+                menuBtn.classList.toggle('active');
+                navList.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
