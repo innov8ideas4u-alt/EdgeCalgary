@@ -24,6 +24,7 @@
             --border: rgba(255, 255, 255, 0.08);
             --glass: rgba(15, 15, 20, 0.85);
             --nav-height: 70px;
+            --header-h: 120px; /* real value set by JS from #site-header's measured height */
             --radius: 12px;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -61,9 +62,36 @@
         a:hover { text-decoration: underline; }
 
         /* --- NAVIGATION --- */
-        nav {
+        /* Banner + nav live in one fixed stack so they can never overlap,
+           no matter how many lines the banner wraps to on a phone. */
+        #site-header {
             position: fixed;
-            top: 50px;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        #coming-soon-banner {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .banner-short { display: none; }
+
+        nav {
+            position: relative;
             width: 100%;
             height: var(--nav-height);
             background: var(--glass);
@@ -136,7 +164,7 @@
         .policy {
             max-width: 820px;
             margin: 0 auto;
-            padding: calc(var(--nav-height) + 110px) 5% 100px;
+            padding: calc(var(--header-h) + 40px) 5% 100px;
         }
 
         .policy-header {
@@ -268,8 +296,9 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
+                width: min(70%, 320px);
                 height: 100vh;
+                height: 100dvh;
                 background: var(--bg-surface);
                 flex-direction: column;
                 justify-content: center;
@@ -277,11 +306,16 @@
                 transition: 0.5s ease;
                 z-index: 1000;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                overflow-y: auto;
             }
 
             .nav-links.active { right: 0; }
 
-            .menu-toggle { display: flex; }
+            .menu-toggle {
+                display: flex;
+                padding: 12px;
+                margin: -12px;
+            }
 
             .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
@@ -289,30 +323,44 @@
 
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
         }
+
+        @media (max-width: 640px) {
+            #coming-soon-banner {
+                font-size: 0.9rem;
+                padding: 8px 14px;
+                gap: 10px;
+            }
+
+            .banner-full { display: none; }
+            .banner-short { display: inline; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Coming Soon Banner -->
-    <div id="coming-soon-banner" style="background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;text-align:center;padding:10px 20px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;position:fixed;top:0;left:0;right:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
-        <span>🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!</span>
-        <a href="https://forms.gle/Yy5PbCZVWeQ7Td63A" target="_blank" rel="noopener" style="padding:6px 18px;background:#fff;color:#6d28d9;font-weight:700;border-radius:999px;text-decoration:none;font-size:0.92rem;white-space:nowrap;">Notify Me →</a>
-    </div>
-
-    <nav id="navbar">
-        <a href="/" class="logo-text" style="color:var(--text-primary);font-size:1.4rem;letter-spacing:0.04em;text-decoration:none;">EDGE</a>
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span><span></span><span></span>
+    <div id="site-header">
+        <!-- Coming Soon Banner -->
+        <div id="coming-soon-banner">
+            <span class="banner-full">🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!</span>
+            <span class="banner-short">🚀 Coming Soon to Calgary!</span>
+            <a href="https://forms.gle/Yy5PbCZVWeQ7Td63A" target="_blank" rel="noopener" style="padding:6px 18px;background:#fff;color:#6d28d9;font-weight:700;border-radius:999px;text-decoration:none;font-size:0.92rem;white-space:nowrap;">Notify Me →</a>
         </div>
-        <ul class="nav-links" id="nav-list">
-            <li><a href="/#mission">Mission</a></li>
-            <li><a href="/#programs">Programs</a></li>
-            <li><a href="/#team">Team</a></li>
-            <li><a href="/#contact">Contact</a></li>
-            <li><a href="/privacy">Privacy</a></li>
-            <li><a href="https://os.edgecalgary.org/" class="nav-cta">Log In / Sign Up</a></li>
-        </ul>
-    </nav>
+
+        <nav id="navbar">
+            <a href="/" class="logo-text" style="color:var(--text-primary);font-size:1.4rem;letter-spacing:0.04em;text-decoration:none;">EDGE</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-links" id="nav-list">
+                <li><a href="/#mission">Mission</a></li>
+                <li><a href="/#programs">Programs</a></li>
+                <li><a href="/#team">Team</a></li>
+                <li><a href="/#contact">Contact</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="https://os.edgecalgary.org/" class="nav-cta">Log In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <main class="policy">
         <div class="policy-header">
@@ -413,6 +461,17 @@
     </footer>
 
     <script>
+        // --- HEADER HEIGHT SYNC ---
+        // The banner wraps to more lines on narrow screens, so the fixed header's
+        // height varies; keep --header-h matched to it for content padding.
+        const siteHeader = document.getElementById('site-header');
+        const syncHeaderHeight = () => {
+            document.documentElement.style.setProperty('--header-h', siteHeader.offsetHeight + 'px');
+        };
+        syncHeaderHeight();
+        new ResizeObserver(syncHeaderHeight).observe(siteHeader);
+        window.addEventListener('load', syncHeaderHeight);
+
         // --- NAVIGATION BEHAVIOR ---
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {

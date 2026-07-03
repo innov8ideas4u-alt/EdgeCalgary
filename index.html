@@ -25,6 +25,7 @@
             --border: rgba(255, 255, 255, 0.08);
             --glass: rgba(15, 15, 20, 0.85);
             --nav-height: 70px;
+            --header-h: 120px; /* real value set by JS from #site-header's measured height */
             --radius: 12px;
             --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -37,7 +38,7 @@
 
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: calc(var(--nav-height) + 50px);
+            scroll-padding-top: calc(var(--header-h) + 20px);
         }
 
         body {
@@ -61,9 +62,36 @@
         }
 
         /* --- NAVIGATION --- */
-        nav {
+        /* Banner + nav live in one fixed stack so they can never overlap,
+           no matter how many lines the banner wraps to on a phone. */
+        #site-header {
             position: fixed;
             top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+
+        #coming-soon-banner {
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            color: #fff;
+            text-align: center;
+            padding: 10px 20px;
+            font-family: 'Outfit', sans-serif;
+            font-size: 1rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .banner-short { display: none; }
+
+        nav {
+            position: relative;
             width: 100%;
             height: var(--nav-height);
             background: var(--glass);
@@ -176,11 +204,12 @@
         .hero {
             position: relative;
             min-height: 100vh;
+            min-height: 100svh;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            padding: 0 10%;
+            padding: var(--header-h) 10% 40px;
             overflow: hidden;
             background: url('webpagebackground.jpg') center center / cover no-repeat;
         }
@@ -243,6 +272,7 @@
 
         .cta-group {
             display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             justify-content: center;
             animation: fadeInUp 0.8s 0.4s cubic-bezier(0, 0, 0.2, 1) both;
@@ -321,7 +351,7 @@
         /* GRID SYSTEM */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
             gap: 32px;
         }
 
@@ -387,7 +417,7 @@
         /* --- TEAM SECTION --- */
         .team-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
             gap: 32px;
         }
 
@@ -547,8 +577,9 @@
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
+                width: min(70%, 320px);
                 height: 100vh;
+                height: 100dvh;
                 background: var(--bg-surface);
                 flex-direction: column;
                 justify-content: center;
@@ -556,6 +587,7 @@
                 transition: 0.5s ease;
                 z-index: 1000;
                 box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+                overflow-y: auto;
             }
 
             .nav-links.active {
@@ -564,39 +596,63 @@
 
             .menu-toggle {
                 display: flex;
+                padding: 12px;
+                margin: -12px;
             }
 
             .menu-toggle.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
             .menu-toggle.active span:nth-child(2) { opacity: 0; }
             .menu-toggle.active span:nth-child(3) { transform: rotate(-45deg) translate(8px, -8px); }
 
-            .hero h1 { font-size: 3rem; }
             .contact-container { grid-template-columns: 1fr; }
             .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+        }
+
+        @media (max-width: 640px) {
+            #coming-soon-banner {
+                font-size: 0.9rem;
+                padding: 8px 14px;
+                gap: 10px;
+            }
+
+            .banner-full { display: none; }
+            .banner-short { display: inline; }
+
+            section { padding: 72px 6%; }
+            .card { padding: 28px; }
+
+            .cta-group .btn {
+                flex: 1 1 100%;
+                max-width: 340px;
+            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Coming Soon Banner -->
-    <div id="coming-soon-banner" style="background:linear-gradient(90deg,#6366f1,#8b5cf6);color:#fff;text-align:center;padding:10px 20px;font-family:'Outfit',sans-serif;font-size:1rem;font-weight:600;letter-spacing:0.04em;position:fixed;top:0;left:0;right:0;z-index:1001;display:flex;align-items:center;justify-content:center;gap:16px;flex-wrap:wrap;">
-        <span>🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!</span>
-        <a href="https://forms.gle/Yy5PbCZVWeQ7Td63A" target="_blank" rel="noopener" style="padding:6px 18px;background:#fff;color:#6d28d9;font-weight:700;border-radius:999px;text-decoration:none;font-size:0.92rem;white-space:nowrap;">Notify Me →</a>
-    </div>
-
-    <nav id="navbar" style="top:50px;">
-        <div class="menu-toggle" id="mobile-menu">
-            <span></span><span></span><span></span>
+    <div id="site-header">
+        <!-- Coming Soon Banner -->
+        <div id="coming-soon-banner">
+            <span class="banner-full">🚀 Coming Soon to Calgary — We're not open yet, but we're building something great!</span>
+            <span class="banner-short">🚀 Coming Soon to Calgary!</span>
+            <a href="https://forms.gle/Yy5PbCZVWeQ7Td63A" target="_blank" rel="noopener" style="padding:6px 18px;background:#fff;color:#6d28d9;font-weight:700;border-radius:999px;text-decoration:none;font-size:0.92rem;white-space:nowrap;">Notify Me →</a>
         </div>
-        <ul class="nav-links" id="nav-list" style="margin-left:auto;">
-            <li><a href="#mission" class="nav-item">Mission</a></li>
-            <li><a href="#programs" class="nav-item">Programs</a></li>
-            <li><a href="#team" class="nav-item">Team</a></li>
-            <li><a href="#contact" class="nav-item">Contact</a></li>
-            <li><a href="/privacy">Privacy</a></li>
-            <li><a href="https://os.edgecalgary.org/" class="nav-cta">Log In / Sign Up</a></li>
-        </ul>
-    </nav>
+
+        <nav id="navbar">
+            <a href="#" class="logo-text" style="color:var(--text-primary);font-size:1.4rem;letter-spacing:0.04em;text-decoration:none;">EDGE</a>
+            <div class="menu-toggle" id="mobile-menu">
+                <span></span><span></span><span></span>
+            </div>
+            <ul class="nav-links" id="nav-list" style="margin-left:auto;">
+                <li><a href="#mission" class="nav-item">Mission</a></li>
+                <li><a href="#programs" class="nav-item">Programs</a></li>
+                <li><a href="#team" class="nav-item">Team</a></li>
+                <li><a href="#contact" class="nav-item">Contact</a></li>
+                <li><a href="/privacy">Privacy</a></li>
+                <li><a href="https://os.edgecalgary.org/" class="nav-cta">Log In / Sign Up</a></li>
+            </ul>
+        </nav>
+    </div>
 
     <header class="hero">
         <div class="hero-content">
@@ -745,6 +801,17 @@
     </footer>
 
     <script>
+        // --- HEADER HEIGHT SYNC ---
+        // The banner wraps to more lines on narrow screens, so the fixed header's
+        // height varies; keep --header-h matched to it for hero padding + anchor offsets.
+        const siteHeader = document.getElementById('site-header');
+        const syncHeaderHeight = () => {
+            document.documentElement.style.setProperty('--header-h', siteHeader.offsetHeight + 'px');
+        };
+        syncHeaderHeight();
+        new ResizeObserver(syncHeaderHeight).observe(siteHeader);
+        window.addEventListener('load', syncHeaderHeight);
+
         // --- NAVIGATION BEHAVIOR ---
         const navbar = document.getElementById('navbar');
         window.addEventListener('scroll', () => {
